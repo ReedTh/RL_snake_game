@@ -62,11 +62,3 @@ An agent observes the state of the game and learns to take actions that maximize
 git clone https://github.com/ReedTh/RL_snake_game.git
 cd RL_snake_game
 
-# Install dependencies
-pip install -r requirements.txt
-
-# Start training
-python train.py
-
-# Watch the trained agent play
-python play.py
