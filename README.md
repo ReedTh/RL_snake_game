@@ -1,27 +1,27 @@
 # Snake Game AI with Q-Learning
 
-## 🚀 Features
+## Features
 
-- 🐍 Classic Snake game built using **Pygame**  
-- 🧠 AI agent trained with **Q-learning** and a **neural network**  
-- 📊 Includes training scripts and **visualizations** of the learning process  
+- Classic Snake game built using **Pygame**  
+- AI agent trained with **Q-learning** and a **neural network**  
+- Includes training scripts and **visualizations** of the learning process  
 
 ---
 
-## 🛠️ How It Works
+## How It Works
 
-### 🎮 Game Environment  
+### Game Environment  
 The Snake game is implemented using **Pygame**, which serves as the environment for the agent to interact with.
 
-### 🤖 AI Agent  
+### AI Agent  
 An agent observes the state of the game and learns to take actions that maximize its score over time.
 
-### 🧩 Neural Network Model  
+### Neural Network Model  
 - **Input Layer**: Encodes the current state of the game  
 - **Hidden Layer**: Extracts features and patterns  
 - **Output Layer**: Predicts Q-values for each possible action (left, right, straight)
 
-### 📚 Training Algorithm  
+### Training Algorithm  
 - The agent is trained using the **Q-learning** algorithm  
 - Starts with random actions to explore the environment  
 - Gradually learns from experience using rewards to guide future actions  
@@ -29,7 +29,7 @@ An agent observes the state of the game and learns to take actions that maximize
 
 ---
 
-## 🔁 Training Process
+## Training Process
 
 1. Agent interacts with the game environment  
 2. Takes actions and receives rewards or penalties  
@@ -38,14 +38,14 @@ An agent observes the state of the game and learns to take actions that maximize
 
 ---
 
-## 📈 Results
+## Results
 
 - The AI agent successfully learns to play Snake and achieves high scores  
 - Training performance and score progression are visualized using **matplotlib**  
 
 ---
 
-## 📎 Requirements
+## Requirements
 
 - Python 3.x  
 - Pygame  
@@ -55,10 +55,11 @@ An agent observes the state of the game and learns to take actions that maximize
 
 ---
 
-## 🧪 Run It Yourself Coming Soon
+## Run It Yourself Coming Soon
 
 ```bash
 # Clone the repository
 git clone https://github.com/ReedTh/RL_snake_game.git
 cd RL_snake_game
+
 
