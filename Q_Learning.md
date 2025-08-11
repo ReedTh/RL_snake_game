@@ -35,11 +35,11 @@ new_value = reward + gamma * max(Q(next_state, all_actions))
 ## Rewards in this game
 
 The code usually gives:
-- +10 for eating food,
-- 0 for just moving,
-- -10 for dying.
+- +10 for eating food
+- 0 for just moving
+- -10 for dying
 
-These numbers can be changed if you want the snake to play differently. Going to run tests to see waht is best for the agent.
+These numbers can be changed if you want the snake to play differently. Going to run tests to see what is best for the agent.
 
 ---
 
