@@ -97,7 +97,8 @@ class Agent:
             final_move[int(move)] = 1
         return final_move
     
-def train():
+
+def train(max_games=0):
     plot_scores = []
     plot_mean_scores = []
     total_score = 0
@@ -139,5 +140,14 @@ def train():
             plot_mean_scores.append(mean_score)
             plot(plot_scores, plot_mean_scores)
 
+            # stop if max_games is set and reached
+            if max_games > 0 and agent.numOfGames >= max_games:
+                # save the final plot as an image
+                from plot_result import plt
+                plot(plot_scores, plot_mean_scores, save_path="results.png")
+                print(f"Training finished. Plot saved as results.png")
+                break
+
 if __name__ == "__main__":
-    train()
+    # set max_games 
+    train(max_games=500)

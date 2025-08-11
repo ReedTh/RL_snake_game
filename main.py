@@ -91,7 +91,7 @@ class SnakeGameAI:
         else:
             self.snake.pop()
         # update ui and clock
-        self._update_ui()
+        #self._update_ui()
         self.clock.tick(SPEED)
         # return game over and score
         return reward, game_over, self.score
@@ -111,16 +111,16 @@ class SnakeGameAI:
         return False
 
 
-    def _update_ui(self):
-        self.display.fill(BLACK) # clear screen
-        for pt in self.snake:
-            pygame.draw.rect(self.display, BLUE1, pygame.Rect(pt.x, pt.y, BLOCK_SIZE, BLOCK_SIZE)) # snake body
-            pygame.draw.rect(self.display, BLUE2, pygame.Rect(pt.x + 4, pt.y + 4, 12, 12)) # snake border
-        if self.food is not None:
-            pygame.draw.rect(self.display, RED, pygame.Rect(self.food.x, self.food.y, BLOCK_SIZE, BLOCK_SIZE)) # food
-        text = font.render("Score: " + str(self.score), True, WHITE)
-        self.display.blit(text, [0, 0]) # draw score
-        pygame.display.flip() # update
+    # def _update_ui(self):
+    #     self.display.fill(BLACK) # clear screen
+    #     for pt in self.snake:
+    #         pygame.draw.rect(self.display, BLUE1, pygame.Rect(pt.x, pt.y, BLOCK_SIZE, BLOCK_SIZE)) # snake body
+    #         pygame.draw.rect(self.display, BLUE2, pygame.Rect(pt.x + 4, pt.y + 4, 12, 12)) # snake border
+    #     if self.food is not None:
+    #         pygame.draw.rect(self.display, RED, pygame.Rect(self.food.x, self.food.y, BLOCK_SIZE, BLOCK_SIZE)) # food
+    #     text = font.render("Score: " + str(self.score), True, WHITE)
+    #     self.display.blit(text, [0, 0]) # draw score
+    #     pygame.display.flip() # update
 
 
     def _move(self, action):
