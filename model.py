@@ -68,7 +68,7 @@ class QTrainer:
             if not gameOver[i]:
                 newQ = reward[i] + self.gamma * torch.max(self.model(next_state[i])) # bellman equation
             target[i][torch.argmax(action[i]).item()] = newQ # update only the action taken
-                newQ = reward[i] + self.gamma * torch.max(self.model(next_state[i])) # bellman equation
+            newQ = reward[i] + self.gamma * torch.max(self.model(next_state[i])) # bellman equation
             target[i][torch.argmax(action[i]).item()] = newQ # update only the action taken
 
         self.optimizer.zero_grad()
