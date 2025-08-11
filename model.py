@@ -11,15 +11,10 @@ class Linear_QNet(nn.Module):
         super().__init__()
         self.linear1 = nn.Linear(input_size, hidden_size) # first layer
         self.linear2 = nn.Linear(hidden_size, output_size) # output layer
-        self.linear1 = nn.Linear(input_size, hidden_size) # first layer
-        self.linear2 = nn.Linear(hidden_size, output_size) # output layer
 
     def forward(self, x):
         x = F.relu(self.linear1(x)) # relu for some non-linearity
-        x = F.relu(self.linear1(x)) # relu for some non-linearity
         x = self.linear2(x)
-        return x
-
         return x
 
     def save(self, file_name='model.pth'):

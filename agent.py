@@ -33,6 +33,13 @@ class Agent:
         dir_u = game.direction == Direction.UP # going up?
         dir_d = game.direction == Direction.DOWN # going down?
 
+        # Find the closest food
+        foods = getattr(game, 'foods', None)
+        if foods is not None and len(foods) > 0:
+            closest_food = min(foods, key=lambda f: abs(f.x - head.x) + abs(f.y - head.y))
+        else:
+            closest_food = head # fallback to head if no food (shouldn't happen)
+
         state = [
             # Danger straight
             (dir_r and game.is_collision(point_r)) or
@@ -58,11 +65,11 @@ class Agent:
             dir_l,
             dir_u,
 
-            # Food location
-            game.food.x < game.head.x, # food left
-            game.food.x > game.head.x, # food right
-            game.food.y < game.head.y, # food down
-            game.food.y > game.head.y # food up
+            # Closest food location
+            closest_food.x < head.x, # food left
+            closest_food.x > head.x, # food right
+            closest_food.y < head.y, # food down
+            closest_food.y > head.y # food up
         ]
 
         return np.array(state, dtype=int) # turn it into an array
@@ -150,4 +157,4 @@ def train(max_games=0):
 
 if __name__ == "__main__":
     # set max_games 
-    train(max_games=500)
+    train(max_games=5000)

@@ -26,7 +26,7 @@ BLUE2 = (0, 100, 255)
 BLACK = (0, 0, 0)
 
 BLOCK_SIZE = 20 # size of each block
-SPEED = 90 # game speed
+SPEED = 30 # game speed
 
 
 
@@ -51,18 +51,20 @@ class SnakeGameAI:
                     Point(self.head.x - BLOCK_SIZE, self.head.y),
                     Point(self.head.x - (2 * BLOCK_SIZE), self.head.y)] # snake body
         self.score = 0
-        self.food = None
-        self._place_food() # drop the first food
+        self.foods = []
+        self._place_foods() # drop the first foods
         self.frameIteration = 0 # how many frames since last food
 
 
-    def _place_food(self):
-        # randomly place food somewhere not on the snake
-        x = random.randint(0, int((self.w - BLOCK_SIZE) / BLOCK_SIZE)) * BLOCK_SIZE
-        y = random.randint(0, int((self.h - BLOCK_SIZE) / BLOCK_SIZE)) * BLOCK_SIZE
-        self.food = Point(x, y)
-        if self.food in self.snake:
-            self._place_food()
+    def _place_foods(self):
+        # randomly place 5 foods somewhere not on the snake
+        self.foods = []
+        while len(self.foods) < 5:
+            x = random.randint(0, int((self.w - BLOCK_SIZE) / BLOCK_SIZE)) * BLOCK_SIZE
+            y = random.randint(0, int((self.h - BLOCK_SIZE) / BLOCK_SIZE)) * BLOCK_SIZE
+            food = Point(x, y)
+            if food not in self.snake and food not in self.foods:
+                self.foods.append(food)
 
 
     def play_step(self, action):
@@ -83,15 +85,28 @@ class SnakeGameAI:
             game_over = True
             reward = -10 # bad move
             return reward, game_over, self.score
-        # place new food or just move
-        if self.head == self.food:
+        # check if snake eats any food
+        ate_food = None
+        for i, foods in enumerate(self.foods):
+            if self.head == foods:
+                ate_food = i
+                break
+        if ate_food is not None:
             self.score += 1
-            reward = 10 # yum
-            self._place_food()
+            reward = 15
+            # replace only the eaten food
+            while True:
+                x = random.randint(0, int((self.w - BLOCK_SIZE) / BLOCK_SIZE)) * BLOCK_SIZE
+                y = random.randint(0, int((self.h - BLOCK_SIZE) / BLOCK_SIZE)) * BLOCK_SIZE
+                new_food = Point(x, y)
+                if new_food not in self.snake and new_food not in self.foods:
+                    self.foods[ate_food] = new_food
+                    break
         else:
             self.snake.pop()
+            reward = -0.1 # discourage unnecessary movement
         # update ui and clock
-        #self._update_ui()
+        self._update_ui()
         self.clock.tick(SPEED)
         # return game over and score
         return reward, game_over, self.score
@@ -111,16 +126,16 @@ class SnakeGameAI:
         return False
 
 
-    # def _update_ui(self):
-    #     self.display.fill(BLACK) # clear screen
-    #     for pt in self.snake:
-    #         pygame.draw.rect(self.display, BLUE1, pygame.Rect(pt.x, pt.y, BLOCK_SIZE, BLOCK_SIZE)) # snake body
-    #         pygame.draw.rect(self.display, BLUE2, pygame.Rect(pt.x + 4, pt.y + 4, 12, 12)) # snake border
-    #     if self.food is not None:
-    #         pygame.draw.rect(self.display, RED, pygame.Rect(self.food.x, self.food.y, BLOCK_SIZE, BLOCK_SIZE)) # food
-    #     text = font.render("Score: " + str(self.score), True, WHITE)
-    #     self.display.blit(text, [0, 0]) # draw score
-    #     pygame.display.flip() # update
+    def _update_ui(self):
+        self.display.fill(BLACK) # clear screen
+        for pt in self.snake:
+            pygame.draw.rect(self.display, BLUE1, pygame.Rect(pt.x, pt.y, BLOCK_SIZE, BLOCK_SIZE)) # snake body
+            pygame.draw.rect(self.display, BLUE2, pygame.Rect(pt.x + 4, pt.y + 4, 12, 12)) # snake border
+        for food in self.foods:
+            pygame.draw.rect(self.display, RED, pygame.Rect(food.x, food.y, BLOCK_SIZE, BLOCK_SIZE)) # food
+        text = font.render("Score: " + str(self.score), True, WHITE)
+        self.display.blit(text, [0, 0]) # draw score
+        pygame.display.flip() # update
 
 
     def _move(self, action):
