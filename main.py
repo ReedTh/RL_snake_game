@@ -26,7 +26,7 @@ BLUE2 = (0, 100, 255)
 BLACK = (0, 0, 0)
 
 BLOCK_SIZE = 20 # size of each block
-SPEED = 30 # game speed
+SPEED = 90 # game speed
 
 
 

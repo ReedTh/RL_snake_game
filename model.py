@@ -47,7 +47,7 @@ class QTrainer:
             next_state = torch.unsqueeze(next_state, 0)
             action = torch.unsqueeze(action, 0)
             reward = torch.unsqueeze(reward, 0)
-            gameOver = (gameOver, 0)
+            gameOver = [gameOver]  # make it a list of length 1
 
         # predict Q values with the current state
         pred = self.model(state)
