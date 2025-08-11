@@ -58,10 +58,14 @@ An agent observes the state of the game and learns to take actions that maximize
 ## Run It Yourself 
 
 ```bash
-# Clone the repository
+# clone the repository
 git clone https://github.com/ReedTh/RL_snake_game.git
 cd RL_snake_game
-#install requirements
+# install requirements
+pip install pygame
+pip install numpy
+pip install matplotlib
+# run the training
 python agent.py
 
 
