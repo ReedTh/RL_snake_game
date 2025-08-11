@@ -11,17 +11,24 @@ class Linear_QNet(nn.Module):
         super().__init__()
         self.linear1 = nn.Linear(input_size, hidden_size) # first layer
         self.linear2 = nn.Linear(hidden_size, output_size) # output layer
+        self.linear1 = nn.Linear(input_size, hidden_size) # first layer
+        self.linear2 = nn.Linear(hidden_size, output_size) # output layer
 
     def forward(self, x):
         x = F.relu(self.linear1(x)) # relu for some non-linearity
+        x = F.relu(self.linear1(x)) # relu for some non-linearity
         x = self.linear2(x)
+        return x
+
         return x
 
     def save(self, file_name='model.pth'):
         model_folder_path = './model'
         if not os.path.exists(model_folder_path):
             os.makedirs(model_folder_path) # make folder if it doesn't exist
+            os.makedirs(model_folder_path) # make folder if it doesn't exist
         file_name = os.path.join(model_folder_path, file_name)
+        torch.save(self.state_dict(), file_name) # save the weights
         torch.save(self.state_dict(), file_name) # save the weights
 
 
@@ -32,8 +39,11 @@ class QTrainer:
         self.model = model
         self.optimizer = optim.Adam(model.parameters(), lr=self.lr) # adam optimizer
         self.criterion = nn.MSELoss() # mean squared error
+        self.optimizer = optim.Adam(model.parameters(), lr=self.lr) # adam optimizer
+        self.criterion = nn.MSELoss() # mean squared error
 
     def train_step(self, state, action, reward, next_state, gameOver):
+        # convert everything to tensors just in case
         # convert everything to tensors just in case
         state = np.array(state, dtype=float)
         state = torch.tensor(state, dtype=torch.float)
@@ -50,6 +60,7 @@ class QTrainer:
             gameOver = [gameOver]  # make it a list of length 1
 
         # predict Q values with the current state
+        # predict Q values with the current state
         pred = self.model(state)
         target = pred.clone()
         for i in range(len(gameOver)):
@@ -57,8 +68,13 @@ class QTrainer:
             if not gameOver[i]:
                 newQ = reward[i] + self.gamma * torch.max(self.model(next_state[i])) # bellman equation
             target[i][torch.argmax(action[i]).item()] = newQ # update only the action taken
+                newQ = reward[i] + self.gamma * torch.max(self.model(next_state[i])) # bellman equation
+            target[i][torch.argmax(action[i]).item()] = newQ # update only the action taken
 
         self.optimizer.zero_grad()
         loss = self.criterion(target, pred) # how far off were we?
+        loss = self.criterion(target, pred) # how far off were we?
         loss.backward()
+        self.optimizer.step() # do the update
+
         self.optimizer.step() # do the update
