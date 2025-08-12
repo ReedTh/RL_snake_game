@@ -139,7 +139,7 @@ def train(max_games=0):
                 record = score
                 agent.model.save() # new high score, save the brain
 
-            print('Game', agent.numOfGames, 'Score', score, 'Current Record:', record)
+            print('Game', agent.numOfGames, 'Score:', score, 'Current Record:', record, 'Mean Score:', mean_scores)
 
             plot_scores.append(score)
             total_score += score
