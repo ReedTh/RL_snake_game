@@ -59,7 +59,7 @@ class SnakeGameAI:
     def _place_foods(self):
         # randomly place 5 foods somewhere not on the snake
         self.foods = []
-        while len(self.foods) < 5:
+        while len(self.foods) < 3:
             x = random.randint(0, int((self.w - BLOCK_SIZE) / BLOCK_SIZE)) * BLOCK_SIZE
             y = random.randint(0, int((self.h - BLOCK_SIZE) / BLOCK_SIZE)) * BLOCK_SIZE
             food = Point(x, y)
