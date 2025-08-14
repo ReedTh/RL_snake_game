@@ -12,7 +12,7 @@ The snake plays the game, and the code teaches it how to get better using Q-lear
 - The **agent** (the code) picks what to do next (left, straight, right).
 - The game tells us how good or bad that move was (reward).
 
-We keep doing this over and over until the agent gets good.
+We simply keep doing this over and over until the agent gets good.
 
 ---
 
