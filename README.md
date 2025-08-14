@@ -34,7 +34,7 @@ An agent observes the state of the game and learns to take actions that maximize
 1. Agent interacts with the game environment  
 2. Takes actions and receives rewards or penalties  
 3. Uses **Q-learning** to update its policy based on outcomes  
-4. Over time, learns to make decisions that maximize cumulative rewards  
+4. Over time, learns to make decisions that maximize game state rewards  
 
 ---
 
@@ -47,11 +47,11 @@ An agent observes the state of the game and learns to take actions that maximize
 
 ## Requirements
 
-- Python 3.x  
+- Python 3.xx 
 - Pygame  
 - NumPy  
 - Matplotlib  
-- (Optional) PyTorch or TensorFlow (depending on your neural network framework)
+- PyTorch or TensorFlow (depending on your neural network framework)
 
 ---
 
@@ -60,6 +60,8 @@ An agent observes the state of the game and learns to take actions that maximize
 ```bash
 # clone the repository
 git clone https://github.com/ReedTh/RL_snake_game.git
+
+# get in the right directory
 cd RL_snake_game
 
 # install requirements
@@ -67,5 +69,3 @@ pip install pygame numpy pytorch matplotlib
 
 # run the training
 python agent.py
-
-
