@@ -65,7 +65,7 @@ git clone https://github.com/ReedTh/RL_snake_game.git
 cd RL_snake_game
 
 # install requirements
-pip install pygame numpy pytorch matplotlib
+pip install -r requirements.txt
 
 # run the training
 python agent.py
