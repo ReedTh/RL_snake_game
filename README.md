@@ -47,7 +47,6 @@ An agent observes the state of the game and learns to take actions that maximize
 
 ## Requirements
 
-- Python 3.xx 
 - Pygame  
 - NumPy  
 - Matplotlib  
