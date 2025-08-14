@@ -43,9 +43,9 @@ These numbers can be changed if you want the snake to play differently (more agg
 
 ---
 
-## Epsilon (greedy)
+## Epsilon (greediness)
 
-This is how we decide whether to try something random or use what we already know.
+This is how we decide whether to try something random or use what we already learned.
 
 - With chance `epsilon`, do something random.
 - Otherwise, pick the best move based on Q-values.
